@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let num = (prompt('숫자를 입력하세요'));
+
+        if(num > 0) {
+            alert('양수입니다');
+        } else if(num < 0) {
+            alert('음수입니다');
+        } else if(num == 0) {
+            alert('0 입니다');
+        } else {
+            confirm('숫자를 다시 입력하세요');
+        }
+
+
+        let score =  prompt('성적을 입력하세요');
+
+        if(score >= 90 && score <= 100) {
+            alert('A');
+        } else if(score >= 80 && score < 90) {
+            alert('B');
+        } else if(score >= 70 && score < 80) {
+            alert('C');
+        } else if(score >= 60 && score < 70) {
+            alert('D');
+        } else if(score < 59) {
+            alert('F');
+        } else {
+            confirm('성적을 다시 입력하세요');
+        }
+
+
+        let skills = ["HTML","CSS","Javascript","React"];
+
+        if(skills.includes('Javascript') && skills.includes('React')) {
+            console.log('합격');
+        } else if(skills.includes('Javascript') || skills.includes('React')) {
+            console.log('예비');
+        } else {
+            console.log('탈락');
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
