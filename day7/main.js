@@ -48,7 +48,7 @@ function play() {
     }
 
     chances--;
-    chanceArea.textContent = `남은기회 : ${chances}번`;
+    chanceArea.textContent = `남은 기회 : ${chances}번`;
     
     
     if(userVal < computerNum) {

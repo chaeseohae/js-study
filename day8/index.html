@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>숫자 맞히기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="body-container container">
+        <h1>👾숫자 맞히기 게임👾</h1>
+        <div id="result-area">힌트</div>
+        <div class="input-container">
+            <input type="number" placeholder="1-100 사이의 숫자를 입력해주세요" id="user-input">
+            <button id="play-btn">입력</button>
+        </div>
+        <div id="chance-area">남은 기회 <span>3</span>번</div>
+        <div class="bottom-container">
+            <div class="guess-container">
+                <div id="guess-text">입력한 숫자</div>
+                <div id="guess-area"></div>
+            </div>
+            <div class="reset-container">
+                <button id="reset-btn">다시하기</button>
+            </div>
+        </div>
+        <div id="answer"></div>
 
-
-
-
+    </div>
 
 
 
