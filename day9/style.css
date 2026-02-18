@@ -47,6 +47,10 @@ body {
     text-decoration: line-through;
 }
 
+.task-done-bg {
+    background-color: lightgray;
+}
+
 button {
     background-color: white;
     border: none;
