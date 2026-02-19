@@ -51,7 +51,7 @@ h1 {
 }
 
 .task-area {
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     border-radius: 10px;
     overflow: hidden;
 }
@@ -59,7 +59,7 @@ h1 {
 .task-tabs {
     background-color: #f9f9ff;
     display: flex;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
     position: relative;
 }
 
