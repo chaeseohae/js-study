@@ -4,20 +4,60 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    min-height: 100vh;
+    padding: 70px 0;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 .container {
     background-color: white;
-    min-height: 100vh;
+    min-height: 80vh;
+    max-width: 500px;
     /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    border-radius: 20px;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.input-area {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+#task-input {
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    padding: 7px 15px;
+    width: 100%;
+}
+
+#add-btn {
+    background-color: rgb(195, 205, 255);
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 5px 15px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .task-area {
     border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .task-tabs {
+    background-color: #f9f9ff;
     display: flex;
     border-bottom: 1px solid lightgray;
     position: relative;
@@ -25,21 +65,35 @@ body {
 
 .task-tabs div {
     padding: 1em;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
 }
 
 #under-line {
-    height: 4px;
-    background-color: pink;
     position: absolute;
-    width: 80px;
+    height: 3px;
+    background-color: rgb(195, 205, 255);
+    width: 146px;
     left: 0px;
-    top: 52px;
+    top: 53px;
     padding: 0;
+    transition: 0.3s;
 }
 
 .task {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.task span {
     padding: 1em;
 }
 
@@ -48,10 +102,29 @@ body {
 }
 
 .task-done-bg {
-    background-color: lightgray;
+    background-color: rgb(235, 237, 255);
+    color: #a0a0a0;
 }
 
-button {
-    background-color: white;
+.button-box {
+    display: flex;
+}
+
+.button-box button {
+    height: 100%;
     border: none;
+    width: 4em;
+    margin: 0;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.button-box button:hover {
+    background-color: lightgray;
+}
+.button-box button:first-child:hover {
+    background-color: rgb(150, 150, 255);
+}
+.button-box button:last-child:hover {
+    background-color: rgb(255, 150, 150);
 }

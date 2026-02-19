@@ -12,12 +12,39 @@
 
 let taskInput = document.getElementById("task-input");
 let addBtn = document.getElementById("add-btn");
+let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
+let mode = 'all';
+let filterList = [];
+let underLine = document.getElementById("under-line");
+
+tabs.forEach((tabs => 
+    tabs.addEventListener("click", (e) => horizontalIndicator(e))
+));
+
+function horizontalIndicator(e) {
+    underLine.style.left = e.currentTarget.offsetLeft + "px";
+    underLine.style.width = e.currentTarget.offsetWidth + "px";
+    underLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight - 3 + "px";
+}
 
 addBtn.addEventListener("click", addTask);
-taskInput.addEventListener("focus", function() {
+addBtn.addEventListener("click", function() {
     taskInput.value = "";
 });
+taskInput.addEventListener("keyup", function(event) {
+    if(event.key == 'Enter') {
+        addTask();
+        taskInput.value = "";
+    }
+});
+
+for(let i = 1; i < tabs.length; i++) {
+    tabs[i].addEventListener("click", function(event) {
+        filter(event)
+    });
+}
+console.log(tabs);
 
 function addTask() {
     let task = {
@@ -26,6 +53,11 @@ function addTask() {
         isComplete : false
     };
 
+    if(taskInput.value == "") {
+        alert("할일을 입력해주세요!");
+        return;
+    }
+
     taskList.push(task);
     console.log(taskList);
     
@@ -33,22 +65,34 @@ function addTask() {
 }
 
 function render() {
+    let list = [];
+    
+    if(mode === "all") {
+        list = taskList;
+    } else if(mode === "ongoing" || mode === "done") {
+        list = filterList;
+    }
+
     let resultHTML = "";
-    for(let i = 0; i < taskList.length; i++) {
-        if(taskList[i].isComplete == true) {
+    for(let i = 0; i < list.length; i++) {
+        if(list[i].isComplete == true) {
             resultHTML += `<div class="task task-done-bg">
-                                <div class="task-done">${taskList[i].taskContent}</div>
-                                <div>
-                                    <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-rotate-left"></i></button>
-                                    <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
+                                <span>
+                                    <div class="task-done">${list[i].taskContent}</div>
+                                </span>
+                                <div class="button-box">
+                                    <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-rotate-left"></i></button>
+                                    <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </div>`;
         } else {
             resultHTML += `<div class="task">
-                                <div>${taskList[i].taskContent}</div>
-                                <div>
-                                    <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
-                                    <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
+                                <span>
+                                    <div>${list[i].taskContent}</div>
+                                </span>
+                                <div class="button-box">
+                                    <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check"></i></button>
+                                    <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </div>`;
         }
@@ -60,6 +104,7 @@ function render() {
 }
 
 function toggleComplete(id) {
+
     for(let i = 0; i < taskList.length; i++) {
         if(taskList[i].id == id) {
             taskList[i].isComplete = !taskList[i].isComplete;
@@ -67,20 +112,56 @@ function toggleComplete(id) {
         }
     }
 
-    render();
+    filter();
     console.log(taskList);
 }
 
 function deleteTask(id) {
-    for(let i = 0; i < taskList.length; i++) {
-        if(taskList[i].id == id) {
-            taskList.splice(i,1);
-            break;
+    
+    if(confirm("정말 삭제하시겠습니까?")) {
+
+        for(let i = 0; i < taskList.length; i++) {
+            if(taskList[i].id == id) {
+                taskList.splice(i,1);
+                break;
+            }
         }
     }
-    console.log(taskList)
+    console.log(taskList);
     
-    render();
+    filter();
+}
+
+function filter(event) {
+    if(event) {
+        mode = event.target.id;
+    }
+    filterList = [];
+
+    if(mode === "all") {
+        // 전체 리스트
+        render();
+
+    } else if(mode === "ongoing") {
+        // 진행중인 아이템
+        for(let i = 0; i < taskList.length; i++) {
+            if(taskList[i].isComplete === false) {
+                filterList.push(taskList[i]);
+            }
+        }
+        render();
+        console.log("진행중", filterList);
+        
+    } else if(mode === "done") {
+        // 완료된 아이템
+        for(let i = 0; i < taskList.length; i++) {
+            if(taskList[i].isComplete) {
+                filterList.push(taskList[i]);
+            }
+        }
+        render();
+        console.log("완료", filterList)
+    }
 }
 
 function randomIDGenerator() {
