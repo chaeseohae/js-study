@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background-image: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 70px 0;
+}
+
+.container {
+    background-color: white;
+    min-height: 80vh;
+    max-width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    border-radius: 20px;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.task-tabs {
+    display: flex;
+    position: relative;
+    border: 1px solid red;
+}
+
+#under-line {
+    position: absolute;
+    height: 3px;
+    background-color: rgb(195, 205, 255);
+    width: 146px;
+    left: 0;
+    top: 53px;
+    padding: 0;
+    transition: 0.3s;
+}
