@@ -9,22 +9,75 @@
     <script>
 
         for(let i = 1; i <= 100; i++) {
-            let numString = i.toString();
-            let result = "";
+            // let numString = i.toString();
+            // let result = "";
 
-            for(let j = 0; j < numString.length; j++) {
-                if(numString[j] == '3' || numString[j] == '6' || numString[j] == '9') {
-                    result += "짝";
-                }
+            // for(let j = 0; j < numString.length; j++) {
+            //     if(numString[j] == '3' || numString[j] == '6' || numString[j] == '9') {
+            //         result += "짝";
+            //     }
 
-            }
-            console.log(result.length > 0 ? result : i);
+            // }
+            // console.log(result.length > 0 ? result : i);
             // console.log(i)
         }
 
+        const colors = ['red', 'green', 'blue', 'yellow'];
+        colors.forEach(item => console.log(item))
 
+        const shoppingList = ['우유', '계란', '두부', '파'];
+        shoppingList.forEach(item => console.log(`쇼핑리스트 : ${item}`));
 
+        const scores = [85, 92, 45, 70, 60];
+        for(let i = 0; i < scores.length; i++) {
+            if(scores[i] >= 80) {
+                console.log(scores[i] + "점 합격");
+            } else if(scores[i] < 80) {
+                console.log(scores[i] + "점 불합격");
+            }
+        }
 
+        scores.forEach(item => {
+            if(item >= 80) {
+                console.log(`${item}점 합격22`);
+            } else if(item < 80) {
+                console.log(`${item}점 불합격22`);
+
+            }
+        })
+
+        const emails = ['user1@naver.com', 'test2@gmail.com', 'admin@kakao.com'];
+        emails.forEach(email => {
+            console.log(email.split('@')[0]);
+        });
+
+        const celsius = [0, 10, 20, 30];
+        celsius.forEach(temp => {
+            const fahrenheit = temp * 1.8 + 32;
+            console.log(`섭씨 ${temp}도 -> 화씨 ${fahrenheit}도`)
+        })
+
+        const movies = [
+            { title: '인셉션', year: 2010 },
+            { title: '아바타', year: 2009 },
+            { title: '인터스텔라', year: 2014 }
+        ];
+        movies.forEach(movie => console.log(`영화 ${movie.title}은 ${movie.year}에 개봉했습니다`));
+        
+        movies.forEach(function(movie) {
+            console.log(`영화 ${movie.title}은 ${movie.year}에 개봉했습니다222`);
+        });
+
+        
+        let weight = 2;
+        try {
+            if(weight < 30) {
+                throw new Error("저체중");
+            }
+
+        } catch(error) {
+            console.log(error.message)
+        }
 
 
 
