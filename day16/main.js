@@ -3,9 +3,11 @@ let newsList = [];
 const menus = document.querySelectorAll(".menus button");
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
 let url = new URL(
-    // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-    `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+    // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
 );
+const sideMenus = document.querySelectorAll(".sidenav a:not(.closebtn)");
+sideMenus.forEach(sideMenu => sideMenu.addEventListener("click", (event) => getNewsByCategory(event)));
 
 let searchInput = document.getElementById("search-input");
 searchInput.addEventListener("focus", () => {
@@ -19,12 +21,16 @@ searchInput.addEventListener("keyup", (event) => {
 });
 let searchBtn = document.getElementById("search-btn");
 searchBtn.addEventListener("click", () => searchInput.value = "");
+searchBtn.addEventListener("click", () => {
+    searchInput.style.display = "block"
+});
+
 
 
 const getLatestNews = async () => {
     url = new URL(
-        // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
     );
     
     getNews();
@@ -34,19 +40,20 @@ const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase();
 
     url = new URL(
-        // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
-        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
     );
 
     getNews();
+    closeNav();
 }
 
 const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
 
     url = new URL(
-        // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
-        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
     );
     
     getNews();
@@ -81,23 +88,31 @@ const getNews = async () => {
 
 const render = () => {
     
-    const newsHTML = newsList.map(news => `
-        <div class="row news">
+    const newsHTML = newsList.map(news => {
+        const timeAgo = moment(news.publishedAt).fromNow();
+
+        return `<div class="row news">
             <div class="col-lg-4">
-                <img class="news-img-size" src="${news.urlToImage}">
+                <img class="news-img-size" src="${news.urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU"
+  }">
             </div>
             <div class="col-lg-8">
-                <h2>${news.title}}</h2>
+                <h2>${news.title}</h2>
                 <p>
-                    ${news.description}
+                    ${news.description == null || news.description == "" 
+                        ? "내용 없음" 
+                        : news.description.length >= 200
+                        ? news.description.substring(0, 200) + "..."
+                        : news.description
+                    }
                 </p>
-                <div></div>
-                    ${news.source.name} * ${news.publishedAt.slice(0, 10)}
+                <div>
+                    ${news.source.name || "no source"} * ${timeAgo}
                 </div>
             </div>
         </div>
-        `).join("");
-    
+        `}).join("");
+        
     document.getElementById("news-board").innerHTML = newsHTML;
 }
 
@@ -108,6 +123,21 @@ const errorRender = (errorMessage) => {
 
     document.getElementById("news-board").innerHTML = errorHTML;
 }
+
+
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+
+
 
 getLatestNews();
 
