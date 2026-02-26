@@ -3,8 +3,8 @@ let newsList = [];
 const menus = document.querySelectorAll(".menus button");
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
 let url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-    // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
+    // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+    `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
 );
 const sideMenus = document.querySelectorAll(".sidenav a:not(.closebtn)");
 sideMenus.forEach(sideMenu => sideMenu.addEventListener("click", (event) => getNewsByCategory(event)));
@@ -29,8 +29,8 @@ searchBtn.addEventListener("click", () => {
 
 const getLatestNews = async () => {
     url = new URL(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
+        // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&apiKey=${API_KEY}`
     );
     
     getNews();
@@ -40,8 +40,8 @@ const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase();
 
     url = new URL(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
-        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+        // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
     );
 
     getNews();
@@ -52,8 +52,8 @@ const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
 
     url = new URL(
-        `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
-        // `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+        // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
+        `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
     );
     
     getNews();
