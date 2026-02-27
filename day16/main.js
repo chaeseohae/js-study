@@ -170,7 +170,7 @@ const paginationRender = () => {
 
     if(page != totalPages) {
         paginationHTML += `
-            <li class="page-item" onclick="moveToPage(${lastPage})">
+            <li class="page-item" onclick="moveToPage(${page + 1})">
                 <a class="page-link">&rsaquo;</a>
             </li>
             <li class="page-item" onclick="moveToPage(${totalPages})">
