@@ -66,12 +66,34 @@
 .news-img-size {
     max-width: 100%;
     max-height: 250px;
+    margin-bottom: 15px;
 }
 
 .news {
     border-bottom: 2px solid #000;
 }
 
+.page-item a {
+    /* border: none; */
+    color: #474747;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.page-item.active a {
+    border: 1px solid #474747;
+    background-color: #474747;
+}
+
+.page-item a:hover {
+    color: #474747;
+}
+
+.page-item.active a:hover {
+    border: 1px solid #474747;
+    background-color: #474747;
+    color: #fff;
+}
 
 
 /* The side navigation menu */
@@ -120,17 +142,9 @@
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px),screen and (max-width: 450px) {
-  .sidenav {
-        padding-top: 15px;
-    }
-  .sidenav a {
-        font-size: 18px;
-    }
-  .bar-icon {
-        display: block;
-  }
-  .menus {
-    display: none;
-  }
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  .bar-icon {display: block;}
+  .menus {display: none;}
 }
 
