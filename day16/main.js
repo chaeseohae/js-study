@@ -46,6 +46,8 @@ const getNews = async () => {
 
         if(response.status === 200) {
             if(data.articles.length == 0) {
+                totalResults = 0;
+                paginationRender();
                 throw new Error("No matches for your search.");
             }
 
@@ -77,7 +79,8 @@ const getLatestNews = async () => {
 
 const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase().trim();
-    
+    page = 1;
+
     url = new URL(
         // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
         `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
@@ -89,6 +92,7 @@ const getNewsByCategory = async (event) => {
 
 const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
+    page = 1;
 
     url = new URL(
         // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`
@@ -142,9 +146,16 @@ const errorRender = (errorMessage) => {
 
 
 const paginationRender = () => {
+    
     const totalPages = Math.ceil(totalResults / pageSize);
     const pageGroup = Math.ceil(page / groupSize);
     let lastPage = pageGroup * groupSize;
+    
+    if(totalResults === 0) {
+        document.querySelector(".pagination").innerHTML = "";
+        return;
+    }
+
     if(lastPage > totalPages) {
         lastPage = totalPages;
     }
@@ -168,6 +179,7 @@ const paginationRender = () => {
         }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
     }
 
+    
     if(page != totalPages) {
         paginationHTML += `
             <li class="page-item" onclick="moveToPage(${page + 1})">
